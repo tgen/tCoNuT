@@ -1,0 +1,141 @@
+##/*************************************************************************
+## *  [2010] - [2016] Translational Genomics Research Institute (TGen)
+## *  All Rights Reserved.
+## *
+## * Major Contributor(s):
+##    Jessica Aldrich, David Craig, Jonathan Keats
+## * Minor Contributor(s):
+##
+##  Example PBS script for launching tCoNuT pipeline for copy number analysis of Tumor(or Affected)/Normal comparison.
+##  
+##  Please modify where appropriate parameters to run on user's cluster.
+##
+##/
+
+
+#PBS -S /bin/bash
+#PBS -N tCoNuT
+#PBS -l walltime=12:00:00
+#PBS -l nodes=1:ppn=8
+#PBS -M EMAIL@institute.org
+#PBS -m a
+#PBS -o /home/USER/oeFiles/${PBS_JOBNAME}_${PBS_JOBID}.out
+#PBS -e /home/USER/oeFiles/${PBS_JOBNAME}_${PBS_JOBID}.err
+
+## Module requirements
+module load VCFtools/0.1.10
+module load perl
+module load MCR/9.0
+module load R/3.0.0 ## NEEDS DNAcopy https://bioconductor.org/packages/release/bioc/html/DNAcopy.html
+
+## Put PERL libraries on path
+export PERL5LIB=$PERL5LIB:/home/USER/perl5/lib/perl5
+
+##  Provide path to MCR - MATLAB runtime environment
+MCRPATH=/packages/MCR/9.0/v90
+
+cd $PBS_O_WORKDIR
+cd ${DIR}
+
+##
+## BED file for specific Exome targets  
+## This file is created from Exome kits targets BED file.  Format is Chr, Start Position, End Position, and 
+## Integer if segment is covered by target [0 == not covered by target or >0 == covered by a target]. 
+## Script createBED.sh can be used to generate this file.
+##
+TARGETSFILE=${TARGETS}
+
+##
+##  TXT file containing z-scores.  Available on tCoNuT GitHub page
+##
+ZTABLE="/home/jaldrich/scripts/cna2015/ztable.txt"
+
+##
+##  Ensemble GTF used to annotate the VCFs (http://uswest.ensembl.org/info/data/ftp/index.html)
+##
+CCDSLIST="/home/tgenref/pecan/ensembl_v74/Homo_sapiens.GRCh37.74.gtf.hs37d5.EGFRvIII.gtf"
+
+##
+##  Grab coverage from Picard hsMetrics output
+##
+NORMX=`cat ${NORMALSAMPLE}.proj.md.jr.bam.picHSMetrics|grep -v ^#|grep -v ^BAIT |cut -f 22`
+echo $NORMX
+TUMORX=`cat ${TUMORSAMPLE}.proj.md.jr.bam.picHSMetrics|grep -v ^#|grep -v ^BAIT |cut -f 22`
+echo $TUMORX
+
+##
+##  parseMergVCF.pl available on tCoNuT GitHub page.  This script parses the 
+##  HaploType Caller results filter out all the high quality common heterzygotes in the normal 
+##  and corresponding tumor (affected) sample.  Generates the merged.vcf.txt file is used in tCoNuT 
+##  for centering the data and baf.txt file which contains the B-allele frequencies.
+##
+${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE}
+
+##
+##  tCoNuT
+##
+##  merged.vcf.txt is output file from parseMergeVCF.pl.  This file provides information on the hets
+##  found by HaploType Caller and used for centering the log2Fold-Changes 
+##
+HETFILE=merged.vcf.txt
+
+##
+## Specify type of assay.
+## Options are Exome, Genome or FFPE (not supported)
+##
+assayID="Exome"
+
+##
+## Parameters for tCoNuT.  Currently set for exome data.
+##
+smWin=6                 #   <<<< THIS CAN BE ADJUSTED - smoothing window size >>>>
+fcThresh=0.75           #   <<<< THIS CAN BE ADJUSTED - fold-change threshold - plot >>>>
+res=2                   #   <<<< THIS CAN BE ADJUSTED - min resolution >>>>
+maxGap=1000   		#   <<<< THIS CAN BE ADJUSTED - max distance between consecutive postions >>>>
+
+##
+## Average Coverage calculated Picard hsMetrics can be used for minimum depth 
+##
+hetDepthN=${NORMX}      #   <<<< THIS CAN BE ADJUSTED - min depth of diploid het position >>>>
+hetDepthT=${TUMORX}     #   <<<< THIS CAN BE ADJUSTED - min depth of diploid het position >>>>
+hetDev=0.025            #   <<<< THIS CAN BE ADJUSTED - allowable deviation from ref allele frequency of 0.5+/-0.025
+
+readDepth=$( echo "$hetDepthN * 3" | bc )            #   <<<< THIS CAN BE ADJUSTED - min number of counts >>>
+echo $readDepth
+echo 'time ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepth} ${hetDev} ${TARGETSFILE}'
+
+time ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepthN} ${hetDepthT} ${hetDev} ${TARGETSFILE}
+
+## Segmentation and plotting
+## CBS segmentation for exome data
+Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyExomeV2.R ${OFILE}.cna.tsv ${OFILE}.seg
+
+## Plotting of copy number
+Rscript --vanilla ${tCoNuTdir}/plotting/plotCGH_EXOME.R ${OFILE}.cna.tsv ${OFILE}.amp.tsv ${OFILE}.del.tsv ${OFILE}
+
+## Plotting of copy number with hets superimposed 
+if [ -f ${OFILE}.hets.tsv ];then
+	Rscript --vanilla ${tCoNuTdir}/plotting/plotCGHwithHets.R ${OFILE}.cna.tsv ${OFILE}.amp.tsv ${OFILE}.del.tsv ${OFILE}.hets.tsv ${OFILE}_withhets
+fi
+
+## BAF segmentation and plots
+## CBS Segmentation on absolute BAF 
+Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyBAF.R baf.txt ${OFILE}.baf
+
+## Plotting of BAF
+Rscript --vanilla ${tCoNuTdir}/plotting/plotBAF.R baf.txt ${OFILE}.baf
+
+## Linear Genome Plotting of CNA and BAF (both scripts are MATLAB code)
+${tCoNuTdir}/plotting/plotLinearCNA/run_plotLinearCNAandBAF.sh ${MCRPATH} ${OFILE}.cna.tsv baf.txt ${OFILE}.cnaBAF.png
+${tCoNuTdir}/plotting/plotLinearCNAabsBAF/run_plotLinearCNAandAbsBAF.sh ${MCRPATH} ${OFILE}.cna.tsv baf.txt ${OFILE}.cnaAbsBAF.png
+
+##Annotate and convert SEG file to gVCF 
+DUPTHRESH=0.58     #   <<<< THIS CAN BE ADJUSTED - Amplification Threshold - log2 fold-change >>>>
+DELTHRESH=-0.99    #   <<<< THIS CAN BE ADJUSTED - Deletion Threshold - log2 fold-change >>>>
+
+${tCoNuTdir}/annotSeg.pl ${CCDSLIST} ${OFILE}.cna.seg ${DUPTHRESH} ${DELTHRESH}
+
+${tCoNuTdir}/validateCNAVariantsVCF.pl ${OFILE}.cna.seg.vcf baf.txt ${ZTABLE}
+
+
+
