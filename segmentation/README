@@ -1,0 +1,5 @@
+These scripts need an install of R with the DNAcopy package.
+
+R can be downloaded from https://www.r-project.org/
+
+DNAcopy documentation is at https://bioconductor.org/packages/release/bioc/html/DNAcopy.html.
