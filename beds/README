@@ -1,0 +1,4 @@
+This folder contains BED files to be used as TARGETFILE for tCoNuT.  These files
+where generated from targets files that are associated with exome kits.  An overlap
+with targets and exon BED files is done to ensure regions between targets are included.
+In addition each exon is padded with 150 bases on each side.
