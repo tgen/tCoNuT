@@ -27,3 +27,7 @@ Please refer to tCoNuT workflow for overview and ngs_cna2015.pbs for examples on
 <b>Step 2:</b> Create DAT files using tgen_CloneCov.v0092.pl for each BAM.
 
 <b>Step 3:</b> Run parseMergeVCF.pl on HC VCF to get baf.txt and merged.vcf.txt
+
+<b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files
+
+
