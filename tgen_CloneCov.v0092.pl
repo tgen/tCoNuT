@@ -140,7 +140,7 @@ sub init_clone_array {
   print "-Done Initializing\n";
 }
 sub command_arg {
-  $td="/Home/dcraig";
+  $td="/tmp";
   $out="out.cln";
   $lo="";
   $nz=0;
