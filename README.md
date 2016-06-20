@@ -28,6 +28,8 @@ Please refer to tCoNuT workflow for overview and ngs_cna2015.pbs for examples on
 
 <b>Step 3:</b> Run parseMergeVCF.pl on HC VCF to get baf.txt and merged.vcf.txt
 
+%${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE}
+
 <b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files
 
 
