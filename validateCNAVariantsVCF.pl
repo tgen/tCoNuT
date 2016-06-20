@@ -6,7 +6,8 @@
 ##  control (MEDIANCONTROLMAF) and affected/tumor (MEDIANMAF), median abs(0.5-BAF) (MEDIANBAFDEV), and number
 ##  of BAFs (NBAF) across a segment. In addition, a Wilcoxon Rank Sum Test (RANKSUMVALUE) and a test of two 
 ##  proportions (ZSTAT and ZPVALUE) are performed between the control and affected/tumor alternate allele 
-##  frequencies. This additional information can be used to support a shift from diploidy in copy number.
+##  frequencies. This additional information can be used to support a shift from diploidy in copy number. 
+##  This script requires Statistics::R http://search.cpan.org/~gmpassos/Statistics-R-0.02/lib/Statistics/R.pm.
 ##
 ##  ARGUMENTS:
 ##	ARGV[0] is SAMPLE.cna.seg.vcf from annotSeg.pl
