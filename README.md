@@ -9,4 +9,6 @@ Please see tCoNuT wiki for a diagram of the tCoNuT workflow.
 #Requirements
 An installation of Perl and R are required.  R needs the DNAcopy package found at https://bioconductor.org/packages/release/bioc/html/DNAcopy.html.
 
+validateCNAVariantsVCF.pl requires Statistics::R module http://search.cpan.org/~gmpassos/Statistics-R-0.02/lib/Statistics/R.pm
+
 tCoNuT requires the MATLAB Runtime (MCR) v9. Link and instructions for installation are found at http://www.mathworks.com/products/compiler/mcr/. 
