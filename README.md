@@ -22,7 +22,7 @@ tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 6
 #Usage
 Please refer to tCoNuT workflow for overview and ngs_cna2015.pbs for examples on how to call each script.
 
-Step 1 (prior tCoNuT): Aligned paired-end sequencing files (BAMs) for each control and affected/tumor sample. Currently, tCoNuT can only be used on human data. Run HaploType Caller(HC) on BAMs then annotate with SnpEff/SnpSift.
+<b>Step 1 (prior tCoNuT):<\b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. Currently, tCoNuT can only be used on human data. Run HaploType Caller(HC) on BAMs then annotate with SnpEff/SnpSift.
 
 Step 2: Create DAT files using tgen_CloneCov.v0092.pl for each BAM.
 
