@@ -42,6 +42,7 @@ ${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME
 ##
 ## Parameters for tCoNuT.  Currently set for EXOME data.
 ##
+MCRPATH=/packages/MCR/9.0/v90
 TARGETSFILE=Agilent_Clinical_Research_Exome_hs37d5.cna.bed # Copy number BED file of Agilent Clinic Research exome targets
 HETFILE=merged.vcf.txt  #   from parseMergeVCF.pl
 
@@ -64,12 +65,17 @@ ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} $
 Step 5: Segmentation with DNAcopy
 
 ```
+### Copy Number ###
 Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyExomeV2.R ${OFILE}.cna.tsv ${OFILE}.seg
+
+### BAF ###
+Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyBAF.R baf.txt ${OFILE}.baf
 ```
 
-Step 6: Convert SEG file to VCF format (really its gVCF) and annotate
+Step 6: Convert copy number SEG file to VCF format (really its a gVCF) and annotate
 
 ```
+###COPY NUMBER####
 ##Annotate and convert SEG file to gVCF
 DUPTHRESH=0.58     #   <<<< THIS CAN BE ADJUSTED - Amplification Threshold - log2 fold-change >>>>
 DELTHRESH=-0.99    #   <<<< THIS CAN BE ADJUSTED - Deletion Threshold - log2 fold-change >>>>
@@ -77,4 +83,23 @@ DELTHRESH=-0.99    #   <<<< THIS CAN BE ADJUSTED - Deletion Threshold - log2 fol
 ${tCoNuTdir}/annotSeg.pl ${CCDSLIST} ${OFILE}.cna.seg ${DUPTHRESH} ${DELTHRESH}
 
 ${tCoNuTdir}/validateCNAVariantsVCF.pl ${OFILE}.cna.seg.vcf baf.txt ${ZTABLE}
+```
+Step 7: Make some plots (See tCoNuT wiki for examples)
+
+```
+## Plotting of copy number
+Rscript --vanilla ${tCoNuTdir}/plotting/plotCGH_EXOME.R ${OFILE}.cna.tsv ${OFILE}.amp.tsv ${OFILE}.del.tsv ${OFILE}
+
+## Plotting of copy number with hets superimposed
+if [ -f ${OFILE}.hets.tsv ];then
+        Rscript --vanilla ${tCoNuTdir}/plotting/plotCGHwithHets.R ${OFILE}.cna.tsv ${OFILE}.amp.tsv ${OFILE}.del.tsv ${OFILE}.hets.tsv ${OFILE}_withhets
+fi
+
+## Plotting of BAF
+Rscript --vanilla ${tCoNuTdir}/plotting/plotBAF.R baf.txt ${OFILE}.baf
+
+## Linear Genome Plotting of CNA and BAF (both scripts are MATLAB code)
+MCRPATH=/packages/MCR/9.0/v90
+${tCoNuTdir}/plotting/plotLinearCNA/run_plotLinearCNAandBAF.sh ${MCRPATH} ${OFILE}.cna.tsv baf.txt ${OFILE}.cnaBAF.png
+${tCoNuTdir}/plotting/plotLinearCNAabsBAF/run_plotLinearCNAandAbsBAF.sh ${MCRPATH} ${OFILE}.cna.tsv baf.txt ${OFILE}.cnaAbsBAF.png
 ```
