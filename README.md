@@ -20,7 +20,7 @@ tCoNuT requires the MATLAB Runtime (MCR) v9. Link and instructions for installat
 tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 64 systems. Most of the scripts are platform independent. Uncompiled MATLAB code (*.m) found in tCoNuT/tCoNuT folder is not platform dependent but would require a license of MATLAB to run.
 
 #Usage
-Please refer to tCoNuT workflow for overview and ngs_cna2015.pbs for examples on how to call each script.
+Please refer to tCoNuT workflow for overview, clonalCovPerl.pbs and ngs_cna2015.pbs for examples on how to call each script.
 
 <b>Step 1 (prior tCoNuT):</b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. Currently, tCoNuT can only be used on human data. Run HaploType Caller(HC) on BAMs then annotate with SnpEff/SnpSift.
 
