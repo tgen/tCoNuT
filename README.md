@@ -29,9 +29,32 @@ Please refer to tCoNuT workflow for overview and ngs_cna2015.pbs for examples on
 <b>Step 3:</b> Run parseMergeVCF.pl on HC VCF to get baf.txt and merged.vcf.txt
 
 ```
-${tCoNuTdir}/parseMergeVCF.pl <i>HC.vcf CONTROLSAMPLENAME AFFECTEDSAMPLENAME<\i>
+${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME}
 ```
 
 <b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files
 
+```
+##
+## Parameters for tCoNuT.  Currently set for EXOME data.
+##
+TARGETSFILE=Agilent_Clinical_Research_Exome_hs37d5.cna.bed # Copy number BED file of Agilent Clinic Research exome targets
+HETFILE=merged.vcf.txt  #   from parseMergeVCF.pl
+
+smWin=6                 #   <<<< THIS CAN BE ADJUSTED - smoothing window size >>>>
+fcThresh=0.75           #   <<<< THIS CAN BE ADJUSTED - fold-change threshold - plot >>>>
+res=2                   #   <<<< THIS CAN BE ADJUSTED - min resolution >>>>
+maxGap=1000             #   <<<< THIS CAN BE ADJUSTED - max distance between consecutive postions >>>>
+
+##
+## Average Coverage calculated Picard hsMetrics can be used for minimum depth (${NORMX} and ${TUMORX})
+##
+hetDepthN=${NORMX}      #   <<<< THIS CAN BE ADJUSTED - min depth of diploid het position >>>>
+hetDepthT=${TUMORX}     #   <<<< THIS CAN BE ADJUSTED - min depth of diploid het position >>>>
+hetDev=0.025            #   <<<< THIS CAN BE ADJUSTED - allowable deviation from ref allele frequency of 0.5+/-0.025
+
+readDepth=$( echo "$hetDepthN * 3" | bc )  # Set max read depth to 3 x control sample's average target coverage (from Picard HS metrics)
+
+${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepthN} ${hetDepthT} ${hetDev} ${TARGETSFILE}
+```
 
