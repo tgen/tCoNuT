@@ -1,0 +1,30 @@
+#/*************************************************************************
+### *  [2010] - [2016] Translational Genomics Research Institute (TGen)
+### *  All Rights Reserved.
+### *
+### * Major Contributor(s):
+###    Jessica Aldrich, David Craig, Jonathan Keats
+### * Minor Contributor(s):
+###
+###  Example PBS script for launching tgen_CloneCov.v0092.pl that generates the DAT files needed for tCoNuT.
+###
+###  Please modify where appropriate parameters to run on user's cluster.
+###
+###/
+
+#PBS -S /bin/bash
+#PBS -N clonalcov
+#PBS -l walltime=12:00:00
+#PBS -l nodes=1:ppn=2
+#PBS -M EMAIL@institute.org
+#PBS -m a
+#PBS -o /home/USER/oeFiles/${PBS_JOBNAME}_${PBS_JOBID}.out
+#PBS -e /home/USER/oeFiles/${PBS_JOBNAME}_${PBS_JOBID}.err
+
+
+cd $PBS_O_WORKDIR
+cd ${DIR}
+
+SAMPATH="PATHTOSAMTOOLS/bin/samtools-0.1.19/samtools"
+
+${tCoNuTdir}/tgen_CloneCov.v0092.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMPATH} >> ${BAMFILE}.clonalCovOut
