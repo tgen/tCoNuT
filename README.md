@@ -61,4 +61,20 @@ readDepth=$( echo "$hetDepthN * 3" | bc )  # Set max read depth to 3 x control s
 
 ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepthN} ${hetDepthT} ${hetDev} ${TARGETSFILE}
 ```
+Step 5: Segmentation with DNAcopy
 
+```
+Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyExomeV2.R ${OFILE}.cna.tsv ${OFILE}.seg
+```
+
+Step 6: Convert SEG file to VCF format (really its gVCF) and annotate
+
+```
+##Annotate and convert SEG file to gVCF
+DUPTHRESH=0.58     #   <<<< THIS CAN BE ADJUSTED - Amplification Threshold - log2 fold-change >>>>
+DELTHRESH=-0.99    #   <<<< THIS CAN BE ADJUSTED - Deletion Threshold - log2 fold-change >>>>
+
+${tCoNuTdir}/annotSeg.pl ${CCDSLIST} ${OFILE}.cna.seg ${DUPTHRESH} ${DELTHRESH}
+
+${tCoNuTdir}/validateCNAVariantsVCF.pl ${OFILE}.cna.seg.vcf baf.txt ${ZTABLE}
+```
