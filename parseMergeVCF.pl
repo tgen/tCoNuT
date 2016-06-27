@@ -11,15 +11,16 @@
 ## gatk's HaploType Caller https://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
 ## SnpEff/SnpSift http://snpeff.sourceforge.net/ 
 ##
-## parseMergeVCF.pl normal-tumor.hc.snpEff.vcf normalSampleName tumorSampleName
+## parseMergeVCF.pl normal-tumor.hc.snpEff.vcf normalSampleName tumorSampleName readDepth
 ##
 ## ARGUMENTS:
 ##	[0] HaploType Caller SnpEff annotated VCF
 ##	[1] control sample name used in HaplotypeCaller
 ##      [2] affected/tumor sample name used in HaplotypeCaller
+##	[3] read depth is the min depth of SNP considered for BAF
 ##
 ## OUTPUT:
-##	baf.txt is text file with header: Chromosome Position NormalReadDepth NormalRefAllele NormalAltAllele TumorReadDepth TumorRefAllele TumorAltAllele CONTROLBAF CONTROLMAF BAF MAF ABSBAFDEV
+##	normal-tumor.baf.txt is text file with header: Chromosome Position NormalReadDepth NormalRefAllele NormalAltAllele TumorReadDepth TumorRefAllele TumorAltAllele CONTROLBAF CONTROLMAF BAF MAF ABSBAFDEV
 ##      merged.vcf.txt is a text file with header: Chromosome Position NormalReadDepth NormalRefAllele NormalAltAllele TumorReadDepth TumorRefAllele TumorAltAllele
 ##
 ## *  [2010] - [2016] Translational Genomics Research Institute (TGen)
@@ -34,13 +35,16 @@ use List::MoreUtils 'first_index';
 
 open(VCF,"$ARGV[0]");
 open(OFILE,">","merged.vcf.txt");
-open(OFILE2,">","baf.txt");
+
+$normalName=$ARGV[1];
+$tumorName=$ARGV[2];
+$readDepth=$ARGV[3]
+
+open(OFILE2,">","$normalName-$tumorName.baf.txt");
 
 print OFILE "Chromosome\tPosition\tNormalReadDepth\tNormalRefAllele\tNormalAltAllele\tTumorReadDepth\tTumorRefAllele\tTumorAltAllele\n";
 print OFILE2 "Chromosome\tPosition\tNormalReadDepth\tNormalRefAllele\tNormalAltAllele\tTumorReadDepth\tTumorRefAllele\tTumorAltAllele\tCONTROLBAF\tCONTROLMAF\tBAF\tMAF\tABSBAFDEV\n";
 
-$normalName=$ARGV[1];
-$tumorName=$ARGV[2];
 
 LOOP:while ($line=<VCF>){
 
@@ -96,7 +100,7 @@ LOOP:while ($line=<VCF>){
 		$charA = length($temp[4]);
 	
 		# Write out baf.txt
-		if ( $GMAF > 0.05 && $control[0] eq '0/1' && $charR < 2 && $charA < 2 && sum(@con_allele) > 50 && sum(@aff_allele) > 50 && $con_allele[1]/sum(@con_allele) > 0.05) {
+		if ( $GMAF > 0.05 && $control[0] eq '0/1' && $charR < 2 && $charA < 2 && sum(@con_allele) > $readDepth && sum(@aff_allele) > $readDepth && $con_allele[1]/sum(@con_allele) > 0.05) {
 	
 			$baf = $aff_allele[1]/sum(@aff_allele);
 			$maf = min(@aff_allele)/sum(@aff_allele);
