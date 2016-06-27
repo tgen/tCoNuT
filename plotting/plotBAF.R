@@ -35,7 +35,7 @@ baf[,2]=baf[,2]/1e6
 png(file=paste(pngName,'.png',sep=''),width=500*6*3,height=500*4*3, res=300)
 par(mfrow=c(6,4))
 
-for (i in 1:length(unique(baf[,1]))){
+for (i in unique(baf[,1])){
   tmpBAF <- subset(baf, Chromosome == i)
   
   plot(tmpBAF$Position,tmpBAF$BAF,
