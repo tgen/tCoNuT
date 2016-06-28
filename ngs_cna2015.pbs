@@ -70,7 +70,7 @@ echo $TUMORX
 ##  for centering the data and baf.txt file which contains the B-allele frequencies.
 ##
 READDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another opition would be to use ${TUMORX} from hsMetrics above
-${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE}
+${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE} ${READDEPTH}
 
 ##
 ##  tCoNuT
