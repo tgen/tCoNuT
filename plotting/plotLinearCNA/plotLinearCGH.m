@@ -24,7 +24,11 @@ x_label = chr_endIdx - ceil(chr_data_len/2);
 y_label = zeros(1, length(x_label))+ offset;
 chr_labels = cellstr(num2str(chromIDs'));
 chr_labels = strrep(chr_labels, '23', 'X');
-%chr_labels = strrep(chr_labels, '24', 'Y');
+
+if max(chromIDs)==24
+    chr_labels = strrep(chr_labels, '24', 'Y');
+end
+
 % A gray zero line
 x_zero = [0; length(Y)];
 y_zero = [0;0];

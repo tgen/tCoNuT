@@ -31,9 +31,9 @@ endChr=max(bafFreq(:,1));
 hFig = figure;
 set (hFig,'color','w');
 subplot(2,1,1)
-plotLinearBAF(bafFreq(:,3),bafFreq(:,1),1:endChr,'B-Allele Frequencies (BAF)',[0 0.4470 0.7410])
+plotLinearBAF(bafFreq(:,3),bafFreq(:,1),unique(bafFreq(:,1))','B-Allele Frequencies (BAF)',[0 0.4470 0.7410])
 subplot(2,1,2)
-plotLinearCGH(cgh(:,3),cgh(:,1),1:endChr,'Copy Number',[0.4660 0.6740 0.1880])
+plotLinearCGH(cgh(:,3),cgh(:,1),unique(cgh(:,1))','Copy Number',[0.4660 0.6740 0.1880])
 
 
 print(hFig,outName,'-dpng','-r300');
