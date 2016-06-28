@@ -69,8 +69,8 @@ echo $TUMORX
 ##  and corresponding tumor (affected) sample.  Generates the merged.vcf.txt file is used in tCoNuT 
 ##  for centering the data and baf.txt file which contains the B-allele frequencies.
 ##
-READDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another opition would be to use ${TUMORX} from hsMetrics above
-${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE} ${READDEPTH}
+SNPDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another opition would be to use ${TUMORX} from hsMetrics above
+${tCoNuTdir}/parseMergeVCF.pl ${VCF} ${NORMALSAMPLE} ${TUMORSAMPLE} ${SNPDEPTH}
 
 ##
 ##  tCoNuT
