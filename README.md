@@ -33,7 +33,7 @@ Run HaploType Caller(HC) on control and tumor BAMs together. Use option -D to ge
 
 Annotate HC VCF with SnpEff/SnpSift. GMAF/CAF annotations inserted by SnpSift are used for filtering for high quality SNPs.
 
-You should now have two BAMs (control and tumor/affected) and HC VCF annotated with SnpEff/SnpSift.
+You should now have two BAMs (control and affected) and HC VCF annotated with SnpEff/SnpSift.
 
 Currently, tCoNuT can only be used on human data. 
 
@@ -43,7 +43,7 @@ Currently, tCoNuT can only be used on human data.
 ${tCoNuTdir}/tgen_CloneCov.v0092.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLSPATH}
 ```
 
-You should now have two DAT files (control and tumor/affected).
+You should now have two DAT files (control and affected).
 
 <b>Step 3:</b> Run parseMergeVCF.pl on HC VCF to get baf.txt and merged.vcf.txt
 
@@ -52,7 +52,7 @@ SNPDEPTH=50 	#	<<<< This can be modified for specific cases depending on target 
 ${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME} ${SNPDEPTH}
 ```
 
-You should now have baf.txt and merged.vcf.txt
+You should now have ${CONTROLSAMPLENAME}-${AFFECTEDSAMPLENAME}.baf.txt and merged.vcf.txt
 
 <b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files
 
