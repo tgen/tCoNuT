@@ -23,11 +23,15 @@ tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 6
 
 Please refer to tCoNuT workflow for overview, clonalCovPerl.pbs and ngs_cna2015.pbs for examples on how to call each script.
 
-<b>Step 1 (prior tCoNuT):</b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. This has only been tested with BWA aligned paired ends but should work with other aligners. Here is example of how we run bwa-mem on a sample.
+<b>Step 1 (prior tCoNuT):</b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. This has only been tested with BWA aligned paired ends but should work with other aligners. 
+
+Here is example of how we run bwa-mem on a sample.
 ```
 ~/bin/bwa-0.7.8/bwa mem -R ${TAGS} -M -t8 REFERENCE.fa SAMPLE_R1.fastq.gz SAMPLE_R2.fastq.gz
 ```
-Run HaploType Caller(HC) on BAMs then annotate with SnpEff/SnpSift.
+Run HaploType Caller(HC) on control and tumor BAMs together.
+
+Annotate HC VCF with SnpEff/SnpSift.
 
 Currently, tCoNuT can only be used on human data. 
 
