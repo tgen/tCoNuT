@@ -80,7 +80,7 @@ readDepth=$( echo "$hetDepthN * 3" | bc )  # Set max read depth to 3 x control s
 
 ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepthN} ${hetDepthT} ${hetDev} ${TARGETSFILE}
 ```
-Step 5: Segmentation with DNAcopy
+<b>Step 5:</b> Segmentation with DNAcopy
 
 ```
 ### Copy Number ###
@@ -90,7 +90,7 @@ Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyExomeV2.R ${OFILE}.cna.tsv
 Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyBAF.R baf.txt ${OFILE}.baf
 ```
 
-Step 6: Convert copy number SEG file to VCF format (really its a gVCF) and annotate
+<b>Step 6:</b> Convert copy number SEG file to VCF format (really its a gVCF) and annotate
 
 ```
 ###COPY NUMBER####
@@ -102,7 +102,7 @@ ${tCoNuTdir}/annotSeg.pl ${CCDSLIST} ${OFILE}.cna.seg ${DUPTHRESH} ${DELTHRESH}
 
 ${tCoNuTdir}/validateCNAVariantsVCF.pl ${OFILE}.cna.seg.vcf baf.txt ${ZTABLE}
 ```
-Step 7: Make some plots (See tCoNuT wiki for examples)
+<b>Step 7:</b> Make some plots (See tCoNuT wiki for examples)
 
 ```
 ## Plotting of copy number
