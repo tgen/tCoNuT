@@ -29,9 +29,9 @@ Here is example of how we run bwa-mem on a sample.
 ```
 ~/bin/bwa-0.7.8/bwa mem -R ${TAGS} -M -t8 REFERENCE.fa SAMPLE_R1.fastq.gz SAMPLE_R2.fastq.gz
 ```
-Run HaploType Caller(HC) on control and tumor BAMs together.
+Run HaploType Caller(HC) on control and tumor BAMs together. Use option -D to get dbSNP annotations. RS numbers are used for filtering for high quality SNPs.  
 
-Annotate HC VCF with SnpEff/SnpSift.
+Annotate HC VCF with SnpEff/SnpSift. GMAF/CAF annotations inserted by SnpSift are used for filtering for high quality SNPs.
 
 Currently, tCoNuT can only be used on human data. 
 
