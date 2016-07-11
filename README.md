@@ -54,7 +54,7 @@ ${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME
 
 You should now have ${CONTROLSAMPLENAME}-${AFFECTEDSAMPLENAME}.baf.txt and merged.vcf.txt
 
-<b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files
+<b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files. This example is showing parameters for exome data.
 
 ```
 ##
