@@ -92,8 +92,7 @@ LOOP:while ($line=<VCF>){
 		if ($temp[7] =~ /CAF=/ ){
 			$temp[7] =~ /CAF=(.*?);/;
 			@CAF = split(/,/,$1);
-			@sortCAF = sort { $b <=> $a } @CAF;
-			$GMAF = $sortCAF[1];
+			$GMAF = min(@CAF);
 		}
 
 		$charR = length($temp[3]);
