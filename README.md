@@ -21,7 +21,7 @@ tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 6
 
 #Usage 
 
-Please refer to tCoNuT workflow for overview, clonalCovPerl.pbs and ngs_cna2015.pbs for examples on how to call each script.
+Please refer to tCoNuT workflow diagram for an overview. In addition, refer to clonalCovPerl.pbs and ngs_cna2015.pbs for examples on how to call each script.
 
 <b>Step 1 (prior to tCoNuT):</b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. This has only been tested with BWA aligned paired ends but should work with other aligners. 
 
