@@ -58,7 +58,7 @@ You should now have ${CONTROLSAMPLENAME}-${AFFECTEDSAMPLENAME}.baf.txt and merge
 
 ```
 ##
-## Parameters for tCoNuT.  Currently set for EXOME data. Please ngs_cna_2015_WG.pbs for suggested whole genome parameters.
+## Parameters for tCoNuT.  Currently set for EXOME data. Please ngs_cna2015_WG.pbs for suggested whole genome parameters.
 ##
 MCRPATH=/packages/MCR/9.0/v90
 TARGETSFILE=Agilent_Clinical_Research_Exome_hs37d5.cna.bed # Copy number BED file of Agilent Clinic Research exome targets
