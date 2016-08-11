@@ -3,12 +3,17 @@ where generated from targets files that are associated with exome kits.  An over
 with targets and exon BED files is done to ensure regions between targets are included.
 In addition each exon is padded with 150 bases on each side.
 
-If you don't find your kit TARGETSFILE at ... , you can generate one using the createBED.sh script. 
+If you don't find your kit TARGETSFILE at ... , you can generate one using the createBED.sh script or do your own scripting.  
 
-However you generate your TARGETSFILE it has to contain 30956976 lines with these starting and ending lines:
+How ever you generate your TARGETSFILE it has to contain 30956976 lines with these starting and ending lines(with a line for 
+each 100 bases in between):
 
 1	0	100	0
+1	100	200	0
+1	200	300	0
 ...
-25	16600	16700 0
+25	16400	16500	0
+25	16500	16600	0
+25	16600	16700	0
 
 Format is CHR START END FLAG. FLAG is 0 == region to remove, 0 > region to keep.
