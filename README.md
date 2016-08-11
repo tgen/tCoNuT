@@ -54,7 +54,7 @@ ${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME
 
 You should now have ${CONTROLSAMPLENAME}-${AFFECTEDSAMPLENAME}.baf.txt and merged.vcf.txt
 
-<b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files. You will also need a TARGETSFILE if running as exome.  You can find these at http://tools.tgen.org/BED/tCoNuT_BEDfiles/ for some Agilent kits. This example is showing parameters for exome data.
+<b>Step 4:</b> Run tCoNuT with DAT and merged.vcf.txt files. You will also need a TARGETSFILE if running as exome.  You can find these at http://tools.tgen.org/Files/tCoNuT_BEDfiles/ for some Agilent kits. This example is showing parameters for exome data.
 
 ```
 ##
