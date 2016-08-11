@@ -11,7 +11,7 @@
 ##  of regions to be removed not targeted by sequencing. Segments are in 100 base segments. Fourth column of BED file
 ##  is an integer indicating if the segment was covered by a target [0 == not covered; >0 == covered].  BEDtools intersect
 ##  is used to find the overlap between targets file provided with exome sequencing kits and a BED file (patient.B.bed) provided 
-##  on the tCoNuT GitHub page. Consider doing an intersect between the assay targets BED file and a BED file containing all the 
+##  on http://tools.tgen.org/BED/tCoNuT_BEDfiles/. Consider doing an intersect between the assay targets BED file and a BED file containing all the 
 ##  known exons and using that as the TARGETSFILE. Agilent provides a "padded" targets BED which is the preferred one. 
 ##
 ##  
