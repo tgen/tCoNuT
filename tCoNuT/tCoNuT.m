@@ -173,7 +173,7 @@ switch lower(assayID)
         end
        
 	%with filter file but no hets for centering 
-        if nargin==14 && hetFile==0
+        if nargin==14 && ~ischar(hetFile)
 		[cna,amp,del,dlr]=cnaMedianCenter(normal,tumor,smWin,fcThresh,assayID,...
             res,readDepth,intronLength,hetFile,hetDepthN,hetDepthT,hetDev,targetsFile);
 
