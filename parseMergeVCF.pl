@@ -38,7 +38,7 @@ open(OFILE,">","merged.vcf.txt");
 
 $normalName=$ARGV[1];
 $tumorName=$ARGV[2];
-$readDepth=$ARGV[3]
+$readDepth=$ARGV[3];
 
 open(OFILE2,">","$normalName-$tumorName.baf.txt");
 
