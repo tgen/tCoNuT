@@ -37,7 +37,7 @@ You should now have two BAMs (control and affected) and HC VCF annotated with Sn
 
 Currently, tCoNuT can only be used on human data. 
 
-<b>Step 2:</b> Create DAT files using tgen_CloneCov.v0092.pl for each BAM separately.
+<b>Step 2:</b> Create DAT files using tgen_CloneCov.pl for each BAM separately.
 
 ```
 ${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLS}
@@ -45,7 +45,7 @@ ${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLS}
 
 You should now have two DAT files (control and affected).
 
-<b>Step 3:</b> Run parseMergeVCF.pl on HC VCF to get baf.txt and merged.vcf.txt
+<b>Step 3:</b> Run parseMergeVCF.pl on HC VCF (snpEff annotated) to get baf.txt and merged.vcf.txt
 
 ```
 SNPDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another opition would be to use ${TUMORX} from hsMetrics above
