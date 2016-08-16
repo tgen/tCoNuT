@@ -1,4 +1,4 @@
-Some exome assay specific BED files to be used as TARGETFILE for tCoNuT can be downloaded from http://tools.tgen.org/Files/tCoNuT_BEDfiles/. These files where generated from targets files that are associated with exome kits.  An overlap with targets and exon BED files is done to ensure regions between targets are included. In addition each exon is padded with 150 bases on each side.
+Some exome assay specific BED files to be used as TARGETFILE for tCoNuT can be downloaded from http://tools.tgen.org/Files/tCoNuT_BEDfiles/. These files were generated from targets files that are associated with exome kits.  An overlap with targets and exon BED files is done to ensure regions between targets are included. In addition each exon is padded with 150 bases on each side.
 
 If you don't find your kit TARGETSFILE at http://tools.tgen.org/Files/tCoNuT_BEDfiles/, you can generate one using the createBED.sh script 
 or do your own scripting.  
