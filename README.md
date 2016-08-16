@@ -40,7 +40,7 @@ Currently, tCoNuT can only be used on human data.
 <b>Step 2:</b> Create DAT files using tgen_CloneCov.v0092.pl for each BAM separately.
 
 ```
-${tCoNuTdir}/tgen_CloneCov.v0092.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLSPATH}
+${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLS}
 ```
 
 You should now have two DAT files (control and affected).
