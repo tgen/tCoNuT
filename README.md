@@ -15,7 +15,7 @@ https://bioconductor.org/packages/release/bioc/html/DNAcopy.html.
 validateCNAVariantsVCF.pl requires Statistics::R module
 http://search.cpan.org/~gmpassos/Statistics-R-0.02/lib/Statistics/R.pm
 
-tCoNuT requires the MATLAB Runtime (MCR) v9. Link and instructions for installation are found at http://www.mathworks.com/products/compiler/mcr/. Compiled MATLAB code does not require a MATLAB license just requires the MCR.
+tCoNuT requires the MATLAB Runtime (MCR) v9.0. Link and instructions for installation are found at http://www.mathworks.com/products/compiler/mcr/. Compiled MATLAB code does not require a MATLAB license just requires the MCR.
 
 tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 64 systems. Most of the scripts are platform independent. Uncompiled MATLAB code (*.m) found in tCoNuT/tCoNuT folder is not platform dependent but would require a license of MATLAB to run.
 
