@@ -48,7 +48,7 @@ You should now have two DAT files (control and affected).
 <b>Step 3:</b> Run parseMergeVCF.pl on HC VCF (snpEff annotated) to get baf.txt and merged.vcf.txt
 
 ```
-SNPDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another opition would be to use ${TUMORX} from hsMetrics above
+SNPDEPTH=50 	#	<<<< This can be modified for specific cases depending on target coverage. Another option would be to use ${TUMORX} from hsMetrics above
 ${tCoNuTdir}/parseMergeVCF.pl ${HCVCF} ${CONTROLSAMPLENAME} ${AFFECTEDSAMPLENAME} ${SNPDEPTH}
 ```
 
