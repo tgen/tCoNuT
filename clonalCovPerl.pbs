@@ -25,6 +25,6 @@
 cd $PBS_O_WORKDIR
 cd ${DIR}
 
-SAMPATH="PATHTOSAMTOOLS/bin/samtools-0.1.19/samtools"
+SAMTOOLS="PATHTOSAMTOOLS/bin/samtools-0.1.19/samtools"
 
-${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMPATH} >> ${BAMFILE}.clonalCovOut
+${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMTOOLS} >> ${BAMFILE}.clonalCovOut
