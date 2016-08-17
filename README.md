@@ -80,7 +80,7 @@ readDepth=$( echo "$hetDepthN * 3" | bc )  # Set max read depth to 3 x control s
 
 ${tCoNuTdir}/tCoNuT/run_tCoNuT.sh ${MCRPATH} ${NORMALDAT} ${TUMORDAT} ${OFILE} ${HETFILE} ${smWin} ${fcThresh} ${assayID} ${res} ${readDepth} ${maxGap} ${hetDepthN} ${hetDepthT} ${hetDev} ${TARGETSFILE}
 ```
-<b>Step 5:</b> Segmentation with DNAcopy
+<b>Step 5:</b> Segmentation of exome copy number with DNAcopy. Depending on your data and study objective you might need to adjust parameters for DNAcopy to get the segmentation optimized for your problem. For whole genome, use runDNAcopyV2.R.
 
 ```
 ### Copy Number ###
