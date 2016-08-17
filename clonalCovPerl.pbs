@@ -6,7 +6,7 @@
 ###    Jessica Aldrich, David Craig, Jonathan Keats
 ### * Minor Contributor(s):
 ###
-###  Example PBS script for launching tgen_CloneCov.v0092.pl that generates the DAT files needed for tCoNuT.
+###  Example PBS script for launching tgen_CloneCov.pl that generates the DAT files needed for tCoNuT.
 ###
 ###  Please modify where appropriate parameters to run on user's cluster.
 ###
@@ -27,4 +27,4 @@ cd ${DIR}
 
 SAMPATH="PATHTOSAMTOOLS/bin/samtools-0.1.19/samtools"
 
-${tCoNuTdir}/tgen_CloneCov.v0092.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMPATH} >> ${BAMFILE}.clonalCovOut
+${tCoNuTdir}/tgen_CloneCov.pl I=${BAMFILE} O=${OUTFILE} M=RG: S=${SAMPATH} >> ${BAMFILE}.clonalCovOut
