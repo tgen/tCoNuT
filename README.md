@@ -90,7 +90,7 @@ Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyExomeV2.R ${OFILE}.cna.tsv
 Rscript --vanilla ${tCoNuTdir}/segmentation/runDNAcopyBAF.R baf.txt ${OFILE}.baf
 ```
 
-<b>Step 6:</b> Convert copy number SEG file to VCF format (really its a gVCF) and annotate
+<b>Step 6:</b> Convert copy number SEG file to VCF format (really its a gVCF) and annotate. Example VCFs are in VCF folder.
 
 ```
 ###COPY NUMBER####
