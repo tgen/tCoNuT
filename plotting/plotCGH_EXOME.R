@@ -46,7 +46,7 @@ fname=paste(pngName,'.png',sep="")
 png(file=fname,width=500*6*3,height=500*4*3,res=300)
 par(mfrow=c(6,4))
 
-for (i in 1:unique(cgh[,1])){
+for (i in unique(cgh[,1])){
   tmpCGH <- subset(cgh, Chr == i)
   tmpAMP <- subset(amp, Chr == i)
   tmpDEL <- subset(del, Chr == i)
