@@ -31,9 +31,9 @@ Here is example of how we run bwa-mem on a sample.
 ```
 Run HaploType Caller(HC) on control and tumor BAMs together. Use option -D to get dbSNP annotations. RS numbers are used for filtering for high quality SNPs.  
 
-Annotate HC VCF with SnpEff/SnpSift. GMAF/CAF annotations inserted by SnpSift are used for filtering for high quality SNPs.
+Annotate HC VCF with dbSNP using SnpEff/SnpSift. GMAF/CAF dbSNP annotations inserted by SnpSift are used for filtering for high quality SNPs.
 
-You should now have two BAMs (control and affected) and HC VCF annotated with SnpEff/SnpSift.
+You should now have two BAMs (control and affected) and HC VCF dbSNP annotated using SnpEff/SnpSift.
 
 Currently, tCoNuT can only be used on human data. 
 
