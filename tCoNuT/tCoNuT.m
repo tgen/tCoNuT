@@ -153,7 +153,8 @@ tumor=load(tumorDat);
 tumormode = mode(tumor(tumor(:,3)>5,3));
 normalmode = mode(normal(normal(:,3)>5,3));
 
-
+log2fc=[];
+bafFreq=[];
 % Call cnaMedianCenter
 switch lower(assayID)
     case 'exome'
