@@ -25,9 +25,15 @@ Please refer to tCoNuT workflow diagram for an overview. In addition, refer to c
 
 <b>Step 1 (prior to tCoNuT):</b> Align paired-end sequencing data (BAMs) for each control and affected/tumor samples. This has only been tested with BWA aligned paired ends but should work with other aligners. 
 
-Here is example of how we run bwa-mem on a sample.
+Here is an example of how we run bwa-mem on a sample.
 ```
 ~/bin/bwa-0.7.8/bwa mem -R ${TAGS} -M -t8 REFERENCE.fa SAMPLE_R1.fastq.gz SAMPLE_R2.fastq.gz
+```
+Run Picard MarkDuplicates on your BAMs.
+
+Here is an example of how we run MarkDuplicates on a BAM.
+```
+java -Xmx22g -jar ${PICARDPATH}/picard.jar MarkDuplicates ASSUME_SORTED=true REMOVE_DUPLICATES=false VALIDATION_STRINGENCY=SILENT TMP_DIR=/tmp INPUT=${BAMFILE} OUTPUT=${OUTPUTBAM} METRICS_FILE=${BAMFILE}.picStats.MarkDupMetrics MAX_RECORDS_IN_RAM=18000000 CREATE_INDEX=true
 ```
 Run HaploType Caller(HC) on control and tumor BAMs together. Use option -D to get dbSNP annotations. RS numbers are used for filtering for high quality SNPs.  
 
