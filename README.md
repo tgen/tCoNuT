@@ -6,7 +6,7 @@ tCoNuT is a read depth based comparative copy number tool designed for whole gen
 
 Please see tCoNuT wiki for a diagram of tCoNuT workflow.
 
-#Requirements
+# Requirements
 A local installation of Perl and R are required.  
 
 R needs the DNAcopy package found at
@@ -19,7 +19,7 @@ tCoNuT requires the MATLAB Runtime (MCR) v9.0. Link and instructions for install
 
 tCoNuT pipeline was developed and compiled (specifically MATLAB code) on Linux 64 systems. Most of the scripts are platform independent. Uncompiled MATLAB code (*.m) found in tCoNuT/tCoNuT folder is not platform dependent but would require a license of MATLAB to run.
 
-#Usage 
+# Usage 
 
 Please refer to tCoNuT workflow diagram for an overview. In addition, refer to clonalCovPerl.pbs and ngs_cna2015.pbs for examples on how to call each script.
 
