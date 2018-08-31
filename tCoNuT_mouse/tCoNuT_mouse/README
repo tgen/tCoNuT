@@ -1,0 +1,6 @@
+Compiled with Matlab2015b
+Needs MCR 9.0
+
+to compile:
+setenv('MCC_USE_DEPFUN','1')
+mcc -m tCoNuT.m
