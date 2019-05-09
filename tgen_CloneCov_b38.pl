@@ -116,7 +116,7 @@ while (<IN>) {
 	elsif ( $chr eq "MT" ) {
                 $chr = 25
         }
-	elsif ( $chr =~ /[\_|*|^E]/ ) {
+	elsif ( $chr =~ /[\_|*|^E|^h]/ ) {
 		$chr = 26
 	}
 
@@ -145,9 +145,9 @@ LOOP: while (<IN>) {
     #if ( $temp[2] eq "X" )  { $temp[2] = 23; }
     #if ( $temp[2] eq "Y" )  { $temp[2] = 24; }
     #if ( $temp[2] eq "M" ) { $temp[2] = 25; }
-    if ( $temp[2] =~ /\D/ ) { 
-       next LOOP; 
-    }
+    #if ( $temp[2] =~ /\D/ ) { 
+    #   next LOOP; 
+    #}
 
 	if ( $temp[2] eq "X" ) {
                 $temp[2] = 23
@@ -162,10 +162,14 @@ LOOP: while (<IN>) {
                 $temp[2] = 26
         }
 
+	if ( $temp[2] =~ /\D/ ) {
+        	next LOOP;
+    	}
+
 	my $readLength = length($temp[9]);
 
 	my $chr = $temp[2];    
-    if ( $chr>0 && $chr<=25 ) {
+        if ( $chr>0 && $chr<=25 ) {
 		if ( $temp[8] > $i_min && $temp[8] < $i_max ) {
 			my $st  = int( $temp[3] / $bin );
 			my $en  = int( ($temp[7] + $readLength) / $bin );
